@@ -1,7 +1,7 @@
 # Cluster BINNING
 # Kobe Arthur Scofield
 # 2018-03-30
-# Build 19
+# Build 20
 # Python: Anaconda3_64 5.0.0.0 (Python 3.6.2)
 # IDE: MSVS2017_Community 15.6.4
 
@@ -33,9 +33,9 @@ def imgplot(imgdata, **kwargs):
 
 # imgsave: save the image
 # imgdata: The image array
-def imgsave(imgdata):
+def imgsave(imgdata, **kwargs):
     savepath = filepath("Input where the image wanna save: ")
-    plt.imsave(arr = imgdata, fname = savepath, format = "pdf") # Export as PDF format
+    plt.imsave(arr = imgdata, fname = savepath, format = "pdf", **kwargs) # Export as PDF format
 # End of imgsave
 
 img_path = filepath("Please input the image path: ")
@@ -49,6 +49,6 @@ for dpy in range(0, BINNING):       # Row interleaving
     for dpx in range(0, BINNING):   # Line interleaving
         proc_img[::] = img_data[dpy::BINNING, dpx::BINNING] / (BINNING**2) + proc_img[::]   # Process each cluster and calculate average in the mean time
 print("Done.")
-imgsave(proc_img)
+imgsave(proc_img, cmap="gray")
 print("Image saved.")
-imgplot(proc_img)
+imgplot(proc_img, cmap="gray")
